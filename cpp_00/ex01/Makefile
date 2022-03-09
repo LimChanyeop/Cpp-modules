@@ -1,20 +1,26 @@
-NAME		= megaphone
+NAME		= PhoneBook
 
 CXX			= c++
+
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
 
-OBJS		= $(SRCS:.cpp=.o)
+SRCS		= main.cpp \
+				PhoneBook.cpp \
+				Information.cpp
+
+OBJS		= $(SRCS:%.cpp=%.o)
 
 RM			= rm -f
+
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CXX) $(CXXFLAGS) $^ -o $@
-	@echo $(NAME) built successfully.$(EOC)
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 $(OBJS): $(SRCS)
-	@$(CXX) $(CXXFLAGS) -c $^ -o $@
+	echo $(OBJS)
+	$(CXX) $(CXXFLAGS) -c $^
 
 clean:
 	@$(RM) $(OBJS)

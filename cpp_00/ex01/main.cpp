@@ -3,22 +3,29 @@
 #include "PhoneBook.hpp"
 #include "Information.hpp"
 
-void runAdd(std::string firstname, std::string lastname, std::string nickname, std::string phone_number, std::string darkest_secret){
-
-}
-
 int main(){
     std::string buffer;
-    Phonebook pb;
+    PhoneBook pb;
 
     while(1){
         std::getline(std::cin, buffer);
         if (buffer.compare("EXIT") == 0){
             break;
         } else if (buffer.compare("ADD") == 0){
-
+            std::string fn, ln, nn, pn, ds;
+            getline(std::cin, fn);
+            getline(std::cin, ln);
+            getline(std::cin, nn);
+            getline(std::cin, pn);
+            getline(std::cin, ds);
+            pb.addInformation(fn, ln, nn, pn, ds);
+            std::cout << "ADD COMPLETED" << std::endl;
         } else if (buffer.compare("SEARCH") == 0){
-            
+            pb.printLists();
+            std::string buffer;
+            std::cout << "INDEX : ";
+            getline(std::cin , buffer);
+            pb.printTarget(std::stoi(buffer));
         }
     }
 
