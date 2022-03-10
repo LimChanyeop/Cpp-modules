@@ -2,13 +2,13 @@
 #define PHONEBOOK_HPP
 
 #include "Information.hpp"
+#include "error.hpp"
 
 class PhoneBook {
 private:
     Information info[8];
     int index;
 public:
-    
     PhoneBook(){
         index = 0;
     }
@@ -37,11 +37,11 @@ public:
     }
 
     void printTarget(int target_idx) {
-        try {
+        if (target_idx < 0 || target_idx > index)
+            error::printWrongIndexErr();
+        else
             info[target_idx].printAllInformation();
-        } catch (std::out_of_range &e){
-            std::cout << "INDEX ERROR" << std::endl;
-        }
+
     }
 };
 
