@@ -8,7 +8,6 @@ private:
     Information info[8];
     int index;
 
-
 public:
     PhoneBook( void );
 	~PhoneBook( void );
@@ -17,7 +16,6 @@ public:
     void printLists( void );
     void printTarget( int target_idx );
 	void printIndexError( void );
-
 };
 
 #endif
