@@ -23,18 +23,15 @@ int main(int argc, char *argv[]){
                 content.append("\n");
         }
     }
-    std::cout << content << std::endl;
     while (1)
     {
         int index;
         index = content.find(argv[2]);
         if (index == -1)
             break;
-        content.erase(index, index + std::strlen(argv[2]));
+        content.erase(index, std::strlen(argv[2]));
         content.insert(index, argv[3]);
     }
-    std::cout << content << std::endl;
-    output_file << content;
-    output_file << content;
+	output_file << content;
     return 0;
 }

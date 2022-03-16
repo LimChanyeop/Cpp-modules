@@ -10,8 +10,8 @@ int main(){
     while(1){
         std::getline(std::cin, buffer);
 
-		if (buffer.compare("\0") == 0)
-			break;
+		// if (buffer.compare("\0") == 0)
+		// 	break;
         if (buffer.compare("EXIT") == 0){
             break;
         } else if (buffer.compare("ADD") == 0){
@@ -42,7 +42,5 @@ int main(){
             pb.printTarget(std::stoi(buffer));
         }
     }
-
-    std::cout << buffer << std::endl;
 
 }

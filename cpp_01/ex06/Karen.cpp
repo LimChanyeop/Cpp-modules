@@ -52,8 +52,6 @@ void Karen::complain( std::string level ){
                 error();
                 printed = TRUE;
                 break;
-            default:
-                break;
             }
         }
     }
