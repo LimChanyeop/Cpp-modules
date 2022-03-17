@@ -8,11 +8,11 @@ int main(){
     PhoneBook pb;
 
     while(1){
+		std::cout << "Enter Command : ";
         std::getline(std::cin, buffer);
-
 		// if (buffer.compare("\0") == 0)
 		// 	break;
-        if (buffer.compare("EXIT") == 0){
+        if (buffer.compare("EXIT") == 0 || std::cin.eof()){
             break;
         } else if (buffer.compare("ADD") == 0){
             std::string fn, ln, nn, pn, ds;
