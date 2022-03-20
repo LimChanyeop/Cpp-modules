@@ -7,6 +7,7 @@ class Fixed {
 private:
 	int m_iValue;
 	static const int m_fracBit = 8;
+	static int 
  
 public:
 	Fixed();
