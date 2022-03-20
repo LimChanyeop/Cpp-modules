@@ -3,31 +3,25 @@
 #include <cmath>
 
 Fixed::Fixed(){
-	std::cout << "Default constructor called" << std::endl;
-	m_iValue = 8;
+	m_iValue = 0;
 };
 
 Fixed::Fixed(const int value){
-	std::cout << "Int constructor called" << std::endl;
 	this->m_iValue = (value << this->m_fracBit);
 };
 
 Fixed::Fixed(const float value){
-	std::cout << "Float constructor called" << std::endl;
 	this->m_iValue = (int)std::roundf(value * (1 << this->m_fracBit));
 };
 
 Fixed::~Fixed(){
-	std::cout << "Destructor called" << std::endl;
 };
 
 Fixed::Fixed(const Fixed& fixed){
-	std::cout << "Copy constructor called" << std::endl;
 	*this = fixed;
 };
 
 Fixed& Fixed::operator=(const Fixed &ref){
-	std::cout << "Assignation operator called" << std::endl;
 	if (&ref == this)
 		return *this;
 	m_iValue = ref.getRawBits();
@@ -35,7 +29,6 @@ Fixed& Fixed::operator=(const Fixed &ref){
 };
 
 int Fixed::getRawBits( void ) const {
-
 	return (m_iValue);
 };
 
@@ -49,6 +42,92 @@ int Fixed::toInt(void) const{
 
 float Fixed::toFloat(void) const{
 	return ((float)this->m_iValue / (1 << this->m_fracBit));
+};
+
+Fixed Fixed::operator+(const Fixed &ref){
+	Fixed fixed;
+	fixed.m_iValue = this->m_iValue + ref.m_iValue;
+	return (*this);
+};
+
+Fixed Fixed::operator-(const Fixed &ref){
+	Fixed fixed;
+	fixed.m_iValue = this->m_iValue - ref.m_iValue;
+	return (fixed);
+};
+
+Fixed Fixed::operator*(const Fixed &ref){
+	Fixed fixed;
+	fixed.m_iValue = ((this->m_iValue * ref.m_iValue) >> this->m_fracBit);
+	return (fixed);
+};
+
+Fixed Fixed::operator/(const Fixed &ref){
+	Fixed fixed;
+	fixed.m_iValue = ((this->m_iValue / ref.m_iValue) >> this->m_fracBit);
+	return (fixed);
+};
+
+Fixed& Fixed::operator++(void){
+	this->m_iValue++;
+	return (*this);
+};
+
+Fixed Fixed::operator++(int){
+	Fixed fixed;
+	fixed = *this;
+	this->m_iValue++;
+	return (fixed);
+};
+
+Fixed& Fixed::operator--(void){
+	this->m_iValue--;
+	return (*this);
+};
+
+Fixed Fixed::operator--(int){
+	Fixed fixed;
+	fixed = *this;
+	this->m_iValue--;
+	return (fixed);
+};
+
+bool Fixed::operator>(const Fixed &ref){
+	return (m_iValue > ref.m_iValue);
+};
+
+bool Fixed::operator<(const Fixed &ref){
+	return (m_iValue < ref.m_iValue);
+};
+
+bool Fixed::operator>=(const Fixed &ref){
+	return (m_iValue >= ref.m_iValue);
+};
+
+bool Fixed::operator<=(const Fixed &ref){
+	return (m_iValue <= ref.m_iValue);
+};
+
+bool Fixed::operator==(const Fixed &ref){
+	return (m_iValue == ref.m_iValue);
+};
+
+bool Fixed::operator!=(const Fixed &ref){
+	return (m_iValue != ref.m_iValue);
+};
+
+const Fixed& Fixed::max(const Fixed& ref1, const Fixed& ref2){
+	if (ref1.m_iValue > ref2.m_iValue)
+		return (ref1);
+	else
+		return (ref2);
+};
+
+const Fixed& Fixed::min(const Fixed& ref1, const Fixed& ref2){
+	if (ref1.m_iValue < ref2.m_iValue)
+		return (ref1);
+	else
+		return (ref2);
 };
 
 std::ostream &operator<<( std::ostream &out, const Fixed &fixed ) {
