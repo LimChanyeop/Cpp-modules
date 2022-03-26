@@ -1,10 +1,10 @@
-#ifndef INFORMATION_HPP
-#define INFORMATION_HPP
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
 
 #include <string>
 #include <iostream>
 
-class Information {
+class Contact {
 private:
     std::string firstname;
     std::string lastname;
@@ -13,13 +13,12 @@ private:
     std::string darkest_secret;
 
 public:
-	Information();
-	~Information();
+	Contact();
+	~Contact();
 
-    // constructor
-    void makeInformation(std::string fn, std::string ln, std::string nn, std::string pn, std::string ds);
+    void makeContact(std::string fn, std::string ln, std::string nn, std::string pn, std::string ds);
     void printNames();
-    void printAllInformation();
+    void printAllContact();
 	std::string getElements(std::string element);
 
 };
