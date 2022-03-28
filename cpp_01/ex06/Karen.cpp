@@ -1,14 +1,14 @@
-#include "Karen.hpp"
+#include "Harl.hpp"
 #include <iostream>
 
-void Karen::debug( void ){
+void Harl::debug( void ){
     std::cout << "[ DEBUG ]" << std::endl << "I love to get extra bacon "
 	<< "for my 7XL-double-cheese-triple-pickle-special-ketchup burger."
 	<< std::endl
 	<< "I just love it!" << std::endl << std::endl;
 }
 
-void Karen::info( void ){
+void Harl::info( void ){
     std::cout << "[ INFO ]" << std::endl;
 	std::cout << "I cannot believe adding extra bacon cost more money."
 	<< std::endl
@@ -18,7 +18,7 @@ void Karen::info( void ){
 	<< std::endl << std::endl;
 }
 
-void Karen::warning( void ){
+void Harl::warning( void ){
     std::cout << "[ WARNING ]" << std::endl;
 	std::cout << "I think I deserve to have some extra bacon for free."
 	<< std::endl
@@ -27,14 +27,14 @@ void Karen::warning( void ){
 	<< std::endl << std::endl;
 }
 
-void Karen::error( void ){
+void Harl::error( void ){
 	std::cout << "[ ERROR ]" << std::endl;
 	std::cout << "This is unacceptable, "
 	<< "I want to speak to the manager now."
 	<< std::endl << std::endl;
 }
 
-void Karen::complain( std::string level ){
+void Harl::complain( std::string level ){
     int printed = FALSE;
     std::string level_list[4] = { "DEBUG", "INFO", "WARNING", "ERROR" };
     for (int i = 0; i < 4; i++){

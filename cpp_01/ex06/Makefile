@@ -8,7 +8,7 @@ OBJS		= $(SRCS:.cpp=.o)
 RM			= rm -f
 
 SRCS		= main.cpp \
-				Karen.cpp
+				Harl.cpp
 			
 all: $(NAME)
 

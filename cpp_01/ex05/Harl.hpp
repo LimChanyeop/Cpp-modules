@@ -8,7 +8,7 @@
 
 #include <string>
 
-class Karen{
+class Harl{
 private:
     void debug( void );
     void info( void );
@@ -16,8 +16,8 @@ private:
     void error( void );
 
 public:
-    Karen(){};
-    ~Karen(){};
+    Harl(){};
+    ~Harl(){};
     void complain( std::string level );
 };
 
