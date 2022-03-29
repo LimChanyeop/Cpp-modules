@@ -7,11 +7,9 @@ Zombie::~Zombie(){
 
 Zombie::Zombie( std::string _name ){
 	name = _name;
-	std::cout << "Call Constructor" << std::endl;
 };
 
 Zombie::Zombie(){
-	std::cout << "Call DEFAULT Constructor" << std::endl;
 };
 
 void Zombie::announce(void){
