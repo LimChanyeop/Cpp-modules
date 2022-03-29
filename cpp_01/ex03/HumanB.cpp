@@ -2,13 +2,14 @@
 #include "HumanB.hpp"
 #include "iostream"
 
-HumanB::HumanB(std::string name_){
+HumanB::HumanB(const std::string &name_){
 	name = name_;
-	
+	weapon = NULL;	
 };
 
 void HumanB::attack(){
-	std::cout << name << " attack with his " << weapon->getType() << std::endl;
+	if(weapon)
+		std::cout << name << " attack with his " << weapon->getType() << std::endl;
 };
 
 void HumanB::setWeapon(Weapon& weapon_){
