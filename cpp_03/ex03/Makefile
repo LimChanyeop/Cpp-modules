@@ -1,4 +1,4 @@
-NAME		= claptrap
+NAME		= diamondtrap
 
 CXX			= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
@@ -8,8 +8,11 @@ OBJS		= $(SRCS:.cpp=.o)
 RM			= rm -f
 
 SRCS		= main.cpp \
-				ClapTrap.cpp
-			
+				ClapTrap.cpp \
+				ScavTrap.cpp \
+				FragTrap.cpp \
+				DiamondTrap.cpp
+
 all: $(NAME)
 
 $(NAME): $(OBJS)

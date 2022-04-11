@@ -24,7 +24,7 @@ ClapTrap::~ClapTrap()
 ClapTrap&	ClapTrap::operator=(const ClapTrap& clapTrap)
 {
 	this->name = clapTrap.getName();
-	this->hitPoints = clapTrap.getHitPoints();	
+	this->hitPoints = clapTrap.getHitPoints();
 	this->energyPoints = clapTrap.getEnergyPoints();
 	this->attackDamage = clapTrap.getAttackDamage();
 	return (*this);
