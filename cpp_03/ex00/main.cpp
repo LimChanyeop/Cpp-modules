@@ -17,8 +17,10 @@ int	main(void)
 	c.attack("b");
 	b.takeDamage(c.getAttackDamage());
 	std::cout << std::endl;
+	b.takeDamage(30);
 	a.beRepaired(25);
 	b.beRepaired(25);
+
 	std::cout << std::endl;
 	return (0);
 }

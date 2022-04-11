@@ -44,51 +44,6 @@ std::string	DiamondTrap::getName() const
 	return this->name;
 }
 
-void	DiamondTrap::takeDamage(unsigned int amount)
-{
-	if (this->hitPoints <= 0)
-    {
-        std::cout << "DiamondTrap " << this->name << " is died." << std::endl;
-        return;
-    }
-    if (this->energyPoints <= 0)
-    {
-        std::cout << "DiamondTrap " << this->name << " is died." << std::endl;
-        return;
-    }
-    if (amount > this->hitPoints)
-    {
-        this->hitPoints = 0;
-        std::cout << "DiamondTrap " << this->name << " is died." << std::endl;
-        return;
-    }
-    this->hitPoints -= amount;
-    std::cout << "DiamondTrap " << this->name << " take " << amount << " damage." << std::endl;
-}
-
-void	DiamondTrap::beRepaired(unsigned int amount)
-{
-	if (this->hitPoints <= 0)
-    {
-        std::cout << "DiamondTrap " << this->name << " is died." << std::endl;
-        return;
-    }
-    if (this->energyPoints <= 0)
-    {
-        std::cout << "DiamondTrap " << this->name << " is out of energy." << std::endl;
-        return;
-    }
-    if (this->hitPoints + amount > DIAMOND_HIT_POINTS)
-    {
-        this->hitPoints = DIAMOND_HIT_POINTS;
-        std::cout << "DiamondTrap " << this->name << " is repaired." << std::endl;
-        return;
-    }
-    this->hitPoints += amount;
-    this->energyPoints -= ENERGY_COST;
-    std::cout << "DiamondTrap " << this->name << " is repaired." << std::endl;
-}
-
 void	DiamondTrap::whoAmI()
 {
 	std::cout << "DiamondTrap name is " << this->name << std::endl;

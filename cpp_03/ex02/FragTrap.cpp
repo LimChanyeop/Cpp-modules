@@ -52,52 +52,6 @@ void	FragTrap::attack(std::string const& target)
 	std::cout << "FragTrap " << name << " attacks " << target << ", causing " << attackDamage << " of damage!" << std::endl;
 }
 
-void	FragTrap::takeDamage(unsigned int amount)
-{
-	if (hitPoints <= 0)
-	{
-		std::cout << "FragTrap " << name << " is died." << std::endl;
-		return;
-	}
-	std::cout << "FragTrap " << name << " takes " << amount << " of damage. Remaining HitPoint is ";
-	if (hitPoints <= amount)
-	{
-		hitPoints = 0;
-		std::cout << "0. FragTrap " << name << " is died." << std:: endl;
-	}
-	else
-	{
-		hitPoints -= amount;
-		std::cout << hitPoints << "." << std::endl;
-	}
-}
-
-void	FragTrap::beRepaired(unsigned int amount)
-{
-	if (hitPoints <= 0)
-	{
-		std::cout << "FragTrap " << name << " is died." << std::endl;
-		return;
-	}
-    if (energyPoints <= 0)
-    {
-        std::cout << "FragTrap " << name << " is out of energy." << std::endl;
-        return;
-    }
-    energyPoints -= ENERGY_COST;
-	std::cout << "FragTrap " << name << " repairs " << amount << " of damage. Remaining HitPoint is ";
-	if (hitPoints >= hitPoints + amount)
-	{
-		hitPoints += amount;
-		std::cout << hitPoints << "." << std::endl;
-	}
-	else
-	{
-		hitPoints = FRAG_HIT_POINTS;
-		std::cout << hitPoints << "." << std::endl;
-	}
-}
-
 void    FragTrap::highFivesGuys()
 {
     if (hitPoints <= 0)

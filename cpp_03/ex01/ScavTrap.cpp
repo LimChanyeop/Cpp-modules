@@ -52,43 +52,6 @@ void	ScavTrap::attack(std::string const& target)
 	std::cout << "ScavTrap " << name << " attacks " << target << " at range, causing " << attackDamage << " points of damage!" << std::endl;
 }
 
-void	ScavTrap::takeDamage(unsigned int amount)
-{
-	if (hitPoints <= 0)
-	{
-		std::cout << "ScavTrap " << name << " is died." << std::endl;
-		return;
-	}
-	std::cout << "ScavTrap " << name << " takes " << amount << " of damage. Remaining HitPoint is ";
-	if (hitPoints <= amount)
-	{
-		hitPoints = 0;
-		std::cout << "0. ScavTrap " << name << " is died." << std:: endl;
-	}
-	else
-	{
-		hitPoints -= amount;
-		std::cout << hitPoints << "." << std::endl;
-	}
-}
-
-void	ScavTrap::beRepaired(unsigned int amount)
-{
-	if (hitPoints <= 0)
-	{
-		std::cout << "ScavTrap " << name << " is died." << std::endl;
-		return;
-	}
-	if (energyPoints <= 0)
-	{
-		std::cout << "ScavTrap " << name << " is out of energy." << std::endl;
-		return;
-	}
-	std::cout << "ScavTrap " << name << " repairs " << amount << " of damage. Remaining HitPoint is ";
-	hitPoints += amount;
-	std::cout << hitPoints << "." << std::endl;
-}
-
 void	ScavTrap::guardGate()
 {
 	if (energyPoints <= 0)
