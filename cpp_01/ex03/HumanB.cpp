@@ -2,7 +2,7 @@
 #include "HumanB.hpp"
 #include "iostream"
 
-HumanB::HumanB(const std::string &name_){
+HumanB::HumanB(const std::string& name_){
 	name = name_;
 	weapon = NULL;	
 };
@@ -13,5 +13,5 @@ void HumanB::attack(){
 };
 
 void HumanB::setWeapon(Weapon& weapon_){
-	weapon = &(weapon_);
+	weapon =& (weapon_);
 };

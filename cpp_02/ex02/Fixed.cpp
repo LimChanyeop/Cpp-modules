@@ -21,7 +21,7 @@ Fixed::Fixed(const Fixed& fixed){
 	*this = fixed;
 };
 
-Fixed& Fixed::operator=(const Fixed &ref){
+Fixed& Fixed::operator=(const Fixed& ref){
 	if (&ref == this)
 		return *this;
 	m_iValue = ref.getRawBits();
@@ -32,8 +32,14 @@ int Fixed::getRawBits( void ) const {
 	return (m_iValue);
 };
 
-void Fixed::setRawBits( int const raw ){
-	m_iValue = raw << m_fracBit;
+int getBiggestNumber(int a, int b){
+	if (a > b)
+		return a;
+	return b;
+};
+
+void Fixed::setRawBits( float const raw ){
+	m_iValue = (int)std::roundf(raw * (1 << m_fracBit));
 };
 
 int Fixed::toInt(void) const{
@@ -44,25 +50,25 @@ float Fixed::toFloat(void) const{
 	return ((float)this->m_iValue / (1 << this->m_fracBit));
 };
 
-Fixed Fixed::operator+(const Fixed &ref){
+Fixed Fixed::operator+(const Fixed& ref){
 	Fixed fixed;
 	fixed.m_iValue = this->m_iValue + ref.m_iValue;
 	return (*this);
 };
 
-Fixed Fixed::operator-(const Fixed &ref){
+Fixed Fixed::operator-(const Fixed& ref){
 	Fixed fixed;
 	fixed.m_iValue = this->m_iValue - ref.m_iValue;
 	return (fixed);
 };
 
-Fixed Fixed::operator*(const Fixed &ref){
+Fixed Fixed::operator*(const Fixed& ref){
 	Fixed fixed;
 	fixed.m_iValue = ((this->m_iValue * ref.m_iValue) >> this->m_fracBit);
 	return (fixed);
 };
 
-Fixed Fixed::operator/(const Fixed &ref){
+Fixed Fixed::operator/(const Fixed& ref){
 	Fixed fixed;
 	fixed.m_iValue = ((this->m_iValue / ref.m_iValue) >> this->m_fracBit);
 	return (fixed);
@@ -92,27 +98,27 @@ Fixed Fixed::operator--(int){
 	return (fixed);
 };
 
-bool Fixed::operator>(const Fixed &ref){
+bool Fixed::operator>(const Fixed& ref){
 	return (m_iValue > ref.getRawBits());
 };
 
-bool Fixed::operator<(const Fixed &ref){
+bool Fixed::operator<(const Fixed& ref){
 	return (m_iValue < ref.getRawBits());
 };
 
-bool Fixed::operator>=(const Fixed &ref){
+bool Fixed::operator>=(const Fixed& ref){
 	return (m_iValue >= ref.getRawBits());
 };
 
-bool Fixed::operator<=(const Fixed &ref){
+bool Fixed::operator<=(const Fixed& ref){
 	return (m_iValue <= ref.getRawBits());
 };
 
-bool Fixed::operator==(const Fixed &ref){
+bool Fixed::operator==(const Fixed& ref){
 	return (m_iValue == ref.getRawBits());
 };
 
-bool Fixed::operator!=(const Fixed &ref){
+bool Fixed::operator!=(const Fixed& ref){
 	return (m_iValue != ref.getRawBits());
 };
 
@@ -130,7 +136,7 @@ const Fixed& Fixed::min(const Fixed& ref1, const Fixed& ref2){
 		return (ref2);
 };
 
-std::ostream &operator<<( std::ostream &out, const Fixed &fixed ) {
+std::ostream& operator<<( std::ostream& out, const Fixed& fixed ) {
 	out << fixed.toFloat();
 	return (out);
 }

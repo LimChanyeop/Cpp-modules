@@ -26,7 +26,7 @@ Fixed::Fixed(const Fixed& fixed){
 	*this = fixed;
 };
 
-Fixed& Fixed::operator=(const Fixed &ref){
+Fixed& Fixed::operator=(const Fixed& ref){
 	std::cout << "Assignation operator called" << std::endl;
 	if (&ref == this)
 		return *this;
@@ -35,12 +35,15 @@ Fixed& Fixed::operator=(const Fixed &ref){
 };
 
 int Fixed::getRawBits( void ) const {
-
 	return (m_iValue);
 };
 
 void Fixed::setRawBits( int const raw ){
-	m_iValue = raw;
+	m_iValue = raw << m_fracBit;
+};
+
+void Fixed::setRawBits( float const raw ){
+	m_iValue = (int)std::roundf(raw * (1 << m_fracBit));
 };
 
 int Fixed::toInt(void) const{
@@ -51,7 +54,7 @@ float Fixed::toFloat(void) const{
 	return ((float)this->m_iValue / (1 << this->m_fracBit));
 };
 
-std::ostream &operator<<( std::ostream &out, const Fixed &fixed ) {
+std::ostream& operator<<( std::ostream& out, const Fixed& fixed ) {
 	out << fixed.toFloat();
 	return (out);
 }

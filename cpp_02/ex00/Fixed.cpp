@@ -15,7 +15,7 @@ Fixed::Fixed(const Fixed& fixed){
 	*this = fixed;
 };
 
-Fixed& Fixed::operator=(const Fixed &ref){
+Fixed& Fixed::operator=(const Fixed& ref){
 	std::cout << "Assignation operator called" << std::endl;
 	if (&ref == this)
 		return *this;
@@ -29,5 +29,5 @@ int Fixed::getRawBits( void ) const {
 };
 
 void Fixed::setRawBits( int const raw ){
-	m_iValue = raw;
+	m_iValue = raw << Fixed::m_fracBit;
 };
