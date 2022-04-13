@@ -18,7 +18,7 @@ public:
 	DiamondTrap(const DiamondTrap& diamondTrap);
 	~DiamondTrap();
 	DiamondTrap&	operator=(const DiamondTrap& diamondTrap);
-	using			FragTrap::attack;
+	using			ScavTrap::attack;
 	std::string		getName() const;
 	void			whoAmI();
 };
