@@ -11,7 +11,7 @@ protected:
 	
 public:
 	Animal();
-	~Animal();
+	virtual ~Animal();
 	Animal(const Animal& animal);
 	Animal&			operator=(const Animal &obj);
 	

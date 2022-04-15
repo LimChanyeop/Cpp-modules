@@ -15,7 +15,7 @@ public:
 	Brain&		operator=(Brain const &brain);
 
 	void 		setIdeas(std::string idea);
-	std::string getIdea(unsigned int i);
+	std::string getIdea(unsigned int i) const;
 };
 
 #endif

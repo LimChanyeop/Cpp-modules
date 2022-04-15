@@ -13,7 +13,7 @@ Brain::Brain(const Brain &brain){
     *this = brain;
 }
 
-Brain &	Brain::operator=(Brain const& brain)
+Brain&	Brain::operator=(Brain const& brain)
 {
 	for (int i = 0; i < 100; i++)
 		this->ideas[i] = brain.ideas[i];
@@ -25,6 +25,6 @@ void        Brain::setIdeas(std::string idea){
 		this->ideas[i] = idea;
 }
 
-std::string	    Brain::getIdea(unsigned int i){
+std::string	    Brain::getIdea(unsigned int i) const {
 	return(this->ideas[i]);
 }

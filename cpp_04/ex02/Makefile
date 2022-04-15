@@ -1,4 +1,4 @@
-NAME		= brain
+NAME		= abstract
 
 CXX			= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98

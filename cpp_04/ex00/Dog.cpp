@@ -21,10 +21,10 @@ Dog	&Dog::operator=(const Dog &obj)
 	return (*this);
 }
 
-std::string Dog::getType(void) const{
+std::string Dog::getType(void) const {
 	return (this->type);
 }
 
-void	Dog::makeSound(void)const{
+void	Dog::makeSound(void) const {
 	std::cout << "woaf woaf!" << std::endl;
 }

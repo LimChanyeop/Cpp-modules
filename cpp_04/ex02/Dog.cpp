@@ -9,17 +9,21 @@ Dog::Dog(void){
 
 Dog::~Dog(void){
 	std::cout << "Dog Default Destructor Called" << std::endl;
-	delete this->brain;
+	if (this->brain)
+		delete this->brain;
 }
 
 Dog::Dog(const Dog &dog) : Animal(dog){
     std::cout << "Dog Copy Constructor Called" << std::endl;
+	this->brain = NULL;
     *this = dog;
 }
 
 Dog	&Dog::operator=(const Dog &dog)
 {
     std::cout << "Dog Operator Called" << std::endl;
+	if(this == &dog)
+		return (*this);
 	this->type = dog.type;
 	if (this->brain)
 		delete this->brain;
