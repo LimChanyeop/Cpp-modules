@@ -1,13 +1,11 @@
 #include "Animal.hpp"
 
-Animal::Animal()
-{
+Animal::Animal(){
 	std::cout << "Animal Default Constructor Called" << std::endl;
 	this->type = "Animal";
 }
 
-Animal::~Animal()
-{
+Animal::~Animal(){
 	std::cout << "Animal Default Destructor Called" << std::endl;
 }
 
@@ -19,15 +17,15 @@ Animal::Animal(const Animal& animal)
 
 Animal	&Animal::operator=(const Animal &obj)
 {
-	std::cout << "Animal Operator Called" << std::endl;
+	std::cout << "Animal Assignment Operator Called" << std::endl;
 	this->type = obj.type;
 	return (*this);
 }
 
-std::string Animal::getType(void) const {
+std::string Animal::getType(void) const{
 	return (this->type);
 }
 
-void	Animal::makeSound(void) const {
-	std::cout << "animal sound" << std::endl;
+void	Animal::makeSound(void) const{
+	std::cout << "Animal sound" << std::endl;
 }

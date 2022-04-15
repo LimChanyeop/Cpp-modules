@@ -1,32 +1,38 @@
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal() : type("Wronganimal")
+WrongAnimal::WrongAnimal()
 {
-	std::cout << "Default WrongAnimal created" << std::endl;
-}
-
-WrongAnimal::WrongAnimal(const WrongAnimal &wrongAnimal) : type(wrongAnimal.getType())
-{
-	std::cout << "Copy WrongAnimal created" << std::endl;
+	std::cout << "Default Constructor Called" << std::endl;
 }
 
 WrongAnimal::~WrongAnimal()
 {
-	std::cout << "WrongAnimal destroyed" << std::endl;
+	std::cout << "Default Destructor Called" << std::endl;
 }
 
-WrongAnimal&	WrongAnimal::operator=(const WrongAnimal &wrongAnimal)
+WrongAnimal::WrongAnimal(const WrongAnimal& WrongAnimal)
 {
-	this->type = wrongAnimal.getType();
+    std::cout << "Copy Constructor Called" << std::endl;
+	*this = WrongAnimal;
+}
+
+WrongAnimal::WrongAnimal(std::string type)
+{
+	std::cout << "Parameterized Constructor Called" << std::endl;
+	this->type = type;
+}
+
+WrongAnimal	&WrongAnimal::operator=(const WrongAnimal &obj)
+{
+    std::cout << "Operator Called" << std::endl;
+	this->type = obj.type;
 	return (*this);
 }
 
-void	WrongAnimal::makeSound() const
-{
-	std::cout << "This is WrongAnimal." << std::endl;
+std::string WrongAnimal::getType(void) const{
+	return (this->type);
 }
 
-std::string	WrongAnimal::getType() const
-{
-	return this->type;
+void	WrongAnimal::makeSound(void)const{
+	std::cout << "WrongAnimal sound" << std::endl;
 }

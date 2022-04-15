@@ -1,32 +1,34 @@
-
-   
 #include "WrongCat.hpp"
 
-WrongCat::WrongCat() : WrongAnimal()
-{
-	std::cout << "Default WrongCat created" << std::endl;
-	this->type = "WrongCat";
+WrongCat::WrongCat(void){
+	std::cout << "Default Constructor Called" << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat &wrongCat) : WrongAnimal(wrongCat)
-{
-	std::cout << "Copy WrongCat created" << std::endl;
-	*(this) = wrongCat;
+WrongCat::~WrongCat(void){
+	std::cout << "Default Destructor Called" << std::endl;
 }
 
-WrongCat::~WrongCat()
-{
-	std::cout << "WrongCat destroyed" << std::endl;
+WrongCat::WrongCat(std::string type) : WrongAnimal(type){
+	std::cout << "Parameterized Constructor Called" << std::endl;
+	this->type = type;
 }
 
-WrongCat&	WrongCat::operator=(const WrongCat &wrongCat)
+WrongCat::WrongCat(const WrongCat &c) : WrongAnimal(c){
+	std::cout << "Copy Constructor Called" << std::endl;
+	*this = c;
+}
+
+WrongCat	&WrongCat::operator=(const WrongCat &obj)
 {
-	std::cout << "Assignation operator of WrongCat" << std::endl;
-	this->type = wrongCat.getType();
+	std::cout << "Operator Called" << std::endl;
+	this->type = obj.type;
 	return (*this);
 }
 
-void	WrongCat::makeSound() const
-{
-	std::cout << "This is WrongCat." << std::endl;
+std::string WrongCat::getType(void) const{
+	return (this->type);
+}
+
+void	WrongCat::makeSound()const{
+	std::cout << "meaw meaw" << std::endl;
 }

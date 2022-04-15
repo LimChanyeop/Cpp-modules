@@ -1,32 +1,36 @@
-NAME		= fragtrap
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/10/21 12:29:07 by zqadiri           #+#    #+#              #
+#    Updated: 2022/03/09 19:57:29 by zqadiri          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CXX			= c++
-CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
+NAME		= Animal
+
+SRCS		=  main.cpp  Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp WrongAnimal.cpp
 
 OBJS		= $(SRCS:.cpp=.o)
 
-RM			= rm -f
+CC			= c++
 
-SRCS		= Animal.cpp \
-				Dog.cpp \
-				Cat.cpp \
-				WrongAnimal.cpp \
-				WrongDog.cpp \
-				WrongCat.cpp
-all: $(NAME)
+FLAGS		= -Wall -Wextra -Werror -std=c++98
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+all:		$(NAME)
 
-$(OBJS): $(SRCS)
-	$(CXX) $(CXXFLAGS) -c $^
+$(NAME):	$(SRCS)
+			@ $(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
 clean:
-	$(RM) $(OBJS)
+			@ rm -f $(OBJS)
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:		clean
+			@ rm -f $(NAME)
 
-re : fclean all
+re:			fclean $(NAME)
 
-.PHONY: all, $(NAME), clean, fclean, re
+.PHONY:		all clean fclean re
