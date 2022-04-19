@@ -15,14 +15,19 @@ Dog::~Dog(void){
 
 Dog::Dog(const Dog &dog) : Animal(dog){
     std::cout << "Dog Copy Constructor Called" << std::endl;
-	this->brain = new Brain();
+	this->brain = NULL;
     *this = dog;
 }
 
 Dog	&Dog::operator=(const Dog &dog)
 {
     std::cout << "Dog Operator Called" << std::endl;
+	if(this == &dog)
+		return (*this);
 	this->type = dog.type;
+	if (this->brain)
+		delete this->brain;
+	this->brain = new Brain();
 	*this->brain = *(dog.brain);
 	return (*this);
 }
@@ -40,5 +45,5 @@ std::string Dog::getType(void) const {
 }
 
 void	Dog::makeSound(void) const {
-	std::cout << "woaf woaff" << std::endl;
+	std::cout << "woaf woaf" << std::endl;
 }

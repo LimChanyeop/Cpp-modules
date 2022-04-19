@@ -23,20 +23,35 @@ int main(void)
 		Cat cat2(*cat); //copy constructor
 		
 		Cat cat3;
+
 		cat3 = cat2; //Assignement Operator
+
+		
+		Animal *temp = new Dog();
+		Dog *im;
+		im = (Dog *)temp;
+	
+
+		Animal *newone = new Dog();
+		Animal one;
+
+		// one = *((Dog *)newone);
+		one = *newone;
 
 		cat3.getBrain()->setIdeas("newer Cat's Idea");
 		
 		cat2.getBrain()->setIdeas("new Cat's Idea");
 		
-		std::cout << "OLD Idea : " <<cat->getBrain()->getIdea(2) << std::endl;
-		std::cout << "NEW Idea : " <<cat2.getBrain()->getIdea(2) << std::endl;
-		std::cout << "NEWER Idea : " <<cat3.getBrain()->getIdea(2) << std::endl;
+		std::cout << "OLD Idea : " << cat->getBrain()->getIdea(2) << std::endl;
+		std::cout << "NEW Idea : " << cat2.getBrain()->getIdea(2) << std::endl;
+		std::cout << "NEWER Idea : " << cat3.getBrain()->getIdea(2) << std::endl;
 
 		delete meta;
 		delete cat;
 		delete dog;
+		system("leaks brain");
 	}
+
 	{
 		Animal	*animals[NUMBER_OF_ANIMALS];
 
