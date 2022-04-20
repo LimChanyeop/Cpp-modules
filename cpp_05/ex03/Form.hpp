@@ -11,12 +11,12 @@ class Form
 {
 	private:
 		const std::string 	_name;
-		bool				_singed;
+		bool				_signed;
 		const int			_grade_to_sign;
 		const int			_grade_to_exec;
 	public:
 		Form();
-		~Form();
+		virtual ~Form();
 		Form(std::string, int, int);
 		Form(const Form&);
 
@@ -35,7 +35,14 @@ class Form
 			public:
 				const char * what () const throw ();
 		};
+		
+		class NotSigned : public std::exception{
+            public:
+            	const char* what() const throw();
+        };
+
 		void	beSigned(Bureaucrat &);
+		virtual void	execute(Bureaucrat const & executor) const = 0;
 };
 
 std::ostream &operator<< (std::ostream &o, const Form &);

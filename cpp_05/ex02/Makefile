@@ -1,4 +1,4 @@
-NAME		= brain
+NAME		= multiform
 
 CXX			= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
@@ -8,7 +8,12 @@ OBJS		= $(SRCS:.cpp=.o)
 RM			= rm -f
 
 SRCS		= Bureaucrat.cpp \
+				PresidentialPardonForm.cpp \
+				RobotomyRequestForm.cpp \
+				ShrubberyCreationForm.cpp \
+				Form.cpp \
 				main.cpp
+
 
 all: $(NAME)
 

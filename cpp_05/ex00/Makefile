@@ -1,4 +1,4 @@
-NAME		= brain
+NAME		= grade
 
 CXX			= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98

@@ -8,6 +8,10 @@ const char* Form::GradeTooLowException::what() const throw(){
 	return "GradeTooLow";
 }
 
+const char* Form::NotSigned::what() const throw(){
+	return "not signed";
+}
+
 Form::Form(): _name(), _grade_to_sign(), _grade_to_exec(){
 	std::cout << "Form Default Constructor" << std::endl;      
 }
@@ -28,13 +32,17 @@ Form::Form(std::string name, int sign, int exec) : _name(name), _grade_to_sign(s
 
 Form::Form(const Form &f): _name(f._name), _grade_to_sign(f._grade_to_sign), _grade_to_exec(f._grade_to_exec)
 {
-	std::cout << "Form Copy Constructor" << std::endl;
+	std::cout << "Form copy Constructor" << std::endl;
+	if (f._grade_to_sign > 150 || f._grade_to_exec > 150)
+		throw Form::GradeTooLowException();
+	if (f._grade_to_sign < 1 || f._grade_to_exec < 1)
+		throw Form::GradeTooHighException();
 	*this = f;  
 }
 
 Form    &Form::operator=(const Form& f)
 {
-	std::cout << "Form Assignation Operator " << std::endl;
+	std::cout << "Form = Operator " << std::endl;
 	this->_signed = f._signed;
 	return (*this);
 }
@@ -44,7 +52,7 @@ std::ostream    &operator<<(std::ostream &os, const Form &f)
 	std::cout << "Form's name : " << f.getName() <<std::endl;
 	std::cout << "Is signed : " << f.getSigned() << std::endl;
 	std::cout << "Grade required to Execute : " << f.getGradetoExec() << std::endl;
-	std::cout << "Grade required to Sign : " << f.getGradetoSign() << std::endl;
+	std::cout << "Grade required to Signe : " << f.getGradetoSign() << std::endl;
 	return (os);
 }
 
@@ -52,19 +60,19 @@ std::string Form::getName(void) const{
 	return (this->_name);
 }
 
-bool	Form::getSigned(void) const{
+bool    Form::getSigned(void) const{
 	return (this->_signed);
 }
 
-int		Form::getGradetoSign(void) const{
+int     Form::getGradetoSign(void) const{
 	return (this->_grade_to_sign);
 }
 
-int		Form::getGradetoExec(void) const{
+int     Form::getGradetoExec(void) const{
 	return (this->_grade_to_exec);
 }
 
-void	Form::beSigned(Bureaucrat &b)
+void    Form::beSigned(Bureaucrat &b)
 {
 	if (this->getSigned() == 1)
 	{
@@ -73,12 +81,11 @@ void	Form::beSigned(Bureaucrat &b)
 	}
 	if (b.getGrade() > this->getGradetoSign())
 	{
-		std::cout << "This Form can't be signed" << std::endl;
+		std::cout << "This Form can not be signed " << std::endl;
 		throw Form::GradeTooLowException();	
 	}
-	else
-	{
-		std::cout << "Form signed !" << std::endl;
+	else{
+		std::cout << "Form signed ! " << std::endl;
 		this->_signed = 1;
 	}
 }

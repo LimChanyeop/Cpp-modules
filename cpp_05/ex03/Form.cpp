@@ -1,7 +1,5 @@
 #include "Form.hpp"
 
-/*--- Exception --*/
-
 const char* Form::GradeTooHighException::what() const throw(){
 	return "GradeTooHigh";
 }
@@ -10,7 +8,9 @@ const char* Form::GradeTooLowException::what() const throw(){
 	return "GradeTooLow";
 }
 
-/*-- Constructors & Destructor --*/
+const char* Form::NotSigned::what() const throw(){
+	return "not signed";
+}
 
 Form::Form(): _name(), _grade_to_sign(), _grade_to_exec(){
 	std::cout << "Form Default Constructor" << std::endl;      
@@ -22,7 +22,7 @@ Form::~Form(){
 
 Form::Form(std::string name, int sign, int exec) : _name(name), _grade_to_sign(sign), _grade_to_exec(exec)
 {
-	this->_singed = 0;
+	this->_signed = 0;
 	std::cout << "Form Parameterized Constructor" << std::endl;
 	if (sign > 150 || exec > 150)
 		throw Form::GradeTooLowException();
@@ -33,15 +33,17 @@ Form::Form(std::string name, int sign, int exec) : _name(name), _grade_to_sign(s
 Form::Form(const Form &f): _name(f._name), _grade_to_sign(f._grade_to_sign), _grade_to_exec(f._grade_to_exec)
 {
 	std::cout << "Form copy Constructor" << std::endl;
+	if (f._grade_to_sign > 150 || f._grade_to_exec > 150)
+		throw Form::GradeTooLowException();
+	if (f._grade_to_sign < 1 || f._grade_to_exec < 1)
+		throw Form::GradeTooHighException();
 	*this = f;  
 }
 
-/*-- Operators --*/
-
 Form    &Form::operator=(const Form& f)
 {
-	std::cout << "Form = Operator " << std::endl;
-	this->_singed = f._singed;
+	std::cout << "Form Assignation Operator " << std::endl;
+	this->_signed = f._signed;
 	return (*this);
 }
 
@@ -54,27 +56,23 @@ std::ostream    &operator<<(std::ostream &os, const Form &f)
 	return (os);
 }
 
-/*-- Accessors --*/
-
 std::string Form::getName(void) const{
 	return (this->_name);
 }
 
-bool	Form::getSigned(void) const{
-	return (this->_singed);
+bool    Form::getSigned(void) const{
+	return (this->_signed);
 }
 
-int		Form::getGradetoSign(void) const{
+int     Form::getGradetoSign(void) const{
 	return (this->_grade_to_sign);
 }
 
-int		Form::getGradetoExec(void) const{
+int     Form::getGradetoExec(void) const{
 	return (this->_grade_to_exec);
 }
 
-/*-- Functions  --*/
-
-void	Form::beSigned(Bureaucrat &b)
+void    Form::beSigned(Bureaucrat &b)
 {
 	if (this->getSigned() == 1)
 	{
@@ -86,9 +84,8 @@ void	Form::beSigned(Bureaucrat &b)
 		std::cout << "This Form can not be signed " << std::endl;
 		throw Form::GradeTooLowException();	
 	}
-	else
-	{
+	else{
 		std::cout << "Form signed ! " << std::endl;
-		this->_singed = 1;
+		this->_signed = 1;
 	}
 }

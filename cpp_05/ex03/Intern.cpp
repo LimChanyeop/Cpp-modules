@@ -43,4 +43,5 @@ Form*	Intern::PresidentialPardon(std::string target)
 Form*	Intern::ShrubberyCreation(std::string target)
 {
     ShrubberyCreationForm *ret = new ShrubberyCreationForm(target);
-	
+	return ret;
+}

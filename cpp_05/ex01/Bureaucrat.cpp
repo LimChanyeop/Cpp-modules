@@ -66,3 +66,22 @@ void	Bureaucrat::increment(void){
 	}
 	this->_grade--;
 }
+
+void	Bureaucrat::signForm(Form &f)
+{
+	try
+	{
+		f.beSigned(*this);
+		std::cout << this->getName() << " signed " << f.getName() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << this->getName() << " couldn't sign "
+		<< f.getName() << " because " ;
+		if (this->getGrade() > f.getGradetoSign())
+			std::cout << "the grade is too low";
+		if (this->getGrade() < f.getGradetoSign())
+			std::cout << "the grade is too high";
+		std::cout << std::endl;
+	}
+}

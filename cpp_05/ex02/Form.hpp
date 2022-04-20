@@ -1,5 +1,5 @@
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef FORM_HPP_
+#define FORM_HPP_
 
 #include <string>
 #include <iostream>
@@ -16,7 +16,7 @@ class Form
 		const int			_grade_to_exec;
 	public:
 		Form();
-		~Form();
+		virtual ~Form();
 		Form(std::string, int, int);
 		Form(const Form&);
 
@@ -35,7 +35,14 @@ class Form
 			public:
 				const char * what () const throw ();
 		};
+		
+		class NotSigned : public std::exception{
+            public:
+            	const char* what() const throw();
+        };
+
 		void	beSigned(Bureaucrat &);
+		virtual void	execute(Bureaucrat const & executor) const = 0;
 };
 
 std::ostream &operator<< (std::ostream &o, const Form &);

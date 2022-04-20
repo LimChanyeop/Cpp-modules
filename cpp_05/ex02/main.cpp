@@ -10,8 +10,9 @@ int main (void)
 		{
 			Bureaucrat b("B-one", 136);
 			ShrubberyCreationForm sh("target");
-			sh.execute(b);
+			std::cout << sh << std::endl;
 			sh.beSigned(b);
+			sh.execute(b);
 			std::cout << "Before decrementing : "<< b << std::endl;
 			b.decrement();
 			std::cout << "After decrementing : " << b << std::endl;

@@ -1,60 +1,47 @@
+#include "Intern.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
 int main (void)
 {
+	try
 	{
-		std::cout << "\n--- Test For Shrubbery Form ---\n" << std::endl;
-		try
-		{
-			Bureaucrat b("B-one", 136);
-			ShrubberyCreationForm sh("target");
-			sh.execute(b);
-			sh.beSigned(b);
-			std::cout << "Before decrementing : "<< b << std::endl;
-			b.decrement();
-			std::cout << "After decrementing : " << b << std::endl;
-		}
-		catch (std::exception &e){
-			std::cout << e.what() << std::endl;
-		}
-	}
-	{
-		std::cout << "\n--- Test For Robotomy Form ---\n" << std::endl;
-		try
-		{
-			Bureaucrat b("B-one", 76);
-			RobotomyRequestForm rb("target");
-			// rb.execute(b);
-			// b.executeForm(rb);
-			b.signForm(rb);
-			rb.beSigned(b);
-			std::cout << "Before incrementing : "<< b << std::endl;
-			b.increment();
-			std::cout << "After incrementing : " << b << std::endl;
-			rb.execute(b);
+		Intern someRandomIntern;
+		Form* rrf;
 
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		std::cout << "Type of the form : " << rrf->getName() << std::endl;
+		{
+			Intern someRandomIntern;
+			Bureaucrat b("B", 1);
+			Form *ret;
+
+			ret = someRandomIntern.makeForm("shrubbery creation", "form");
+			ret->beSigned(b);
+			ret->execute(b);
+			rrf->beSigned(b);
+			rrf->execute(b);
+			delete ret;
+			delete rrf;
 		}
-		catch (std::exception &e){
-			std::cout << e.what() << std::endl;
+		{
+			try 
+			{
+				std::cout << "-- Invalid Form --" << std::endl;
+				Intern someRandomIntern;
+				Form *ret;
+
+				ret = someRandomIntern.makeForm("cherry creation", "form");
+				ret->execute(Bureaucrat());
+			}
+			catch (std::exception &e){
+				std::cout << e.what() << std::endl;
+			}
 		}
 	}
-		{
-		std::cout << "\n--- Test For Presidential Form ---\n" << std::endl;
-		try
-		{
-			Bureaucrat b("B-one", 136);
-			PresidentialPardonForm p("target");
-			p.execute(b);
-			p.beSigned(b);
-			std::cout << "Before decrementing : "<< b << std::endl;
-			b.decrement();
-			std::cout << "After decrementing : " << b << std::endl;
-		}
-		catch (std::exception &e){
-			std::cout << e.what() << std::endl;
-		}
-	}
+	catch (std::exception &e){
+				std::cout << e.what() << std::endl;
+			}
 	return EXIT_SUCCESS;
 }
