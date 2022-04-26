@@ -1,112 +1,127 @@
 #include <iostream>
-#include <string>
 #include <iomanip>
+#include <cmath>
 
-#define ERROR "ARG error"
-#define NON_dis "Non displayable"
-#define IMP "impossible operation"
-
-char	isChar(char	**argv)
+int	is_valid_arg(char* str)
 {
-	std::string str;
-
-	str = argv[1];
-	if (str.size() == 1 && !std::isdigit(str[0]))
-		return (str[0]);
-	return (0);
+	char	*pos = 0;
+	
+	std::strtod(str, &pos);
+	std::string str_pos = static_cast<std::string>(pos);
+	if (str_pos.length() == 0 || (str_pos.length() == 1 && str_pos[0] == 'f'))
+		return 0;
+	return 1;
 }
 
-void	convertToChar(char **argv)
+int print_arg_error(){
+	std::cout << "Error: invalid argument" << std::endl;
+	return 1;
+}
+
+int	print_all_impossible()
 {
-	std::cout << "char : ";
-	if (isChar(argv)){
-		std::cout << isChar(argv) << std::endl;
-	}
-	else
+	std::cout << "char : impossible" << std::endl;
+	std::cout << "int : impossible" << std::endl;
+	std::cout << "float : impossible" << std::endl;
+	std::cout << "double : impossible" << std::endl;
+	return 0;
+}
+
+void	print_char(std::string str)
+{
+	std::cout << "char: ";
+	try
 	{
-		try{
-			int output = std::stoi(argv[1]);
-			if (output < 0 || output > 255)
-				throw std::out_of_range();
-			if (!std::isprint(output)){
-				std::cout << NON_dis << std::endl;
-				return;	
-			}
-			std::cout << static_cast<char>(output) << std::endl;
-		}
-		catch(std::exception &e){
-			std::cout << IMP << std::endl;
-		}
+		double	str_to_d = std::stod(str);
+		int	str_to_i = static_cast<int>(str_to_d);
+		std::string status;
+
+		if (std::isnan(str_to_d) || std::isinf(str_to_d))
+			status = "impossible";
+		else if (str_to_d - str_to_i)
+			status = "impossible";
+		else if ((0 <= str_to_i && str_to_i <= 32) || str_to_i == 127)
+			status = "Non displayable";
+		else if (32 <= str_to_i && str_to_i <= 126)
+			status = "'" + std::string(1, str_to_i) + "'";
+		else
+			status = "impossible";
+		std::cout << status << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "impossible" << std::endl;
 	}
 }
 
-void	convertToInt(char **argv)
+void	print_int(std::string str)
 {
-	std::cout << "int : ";
-	if (isChar(argv)){
-		std::cout << static_cast<int>(isChar(argv)) << std::endl;
+	std::cout << "int: ";
+	try
+	{
+		double str_to_d = std::stod(str);
+
+		if (std::isnan(str_to_d) || std::isinf(str_to_d))
+			std::cout << "impossible" << std::endl;
+		else
+			std::cout << static_cast<int>(str_to_d) << std::endl;
 	}
-	else{
-		try{
-			int output = std::stoi(argv[1]);
-			std::cout << static_cast<int>(output) << std::endl;
-		}
-		catch(std::exception &e){
-			std::cout << IMP << std::endl;
-		}
+	catch(const std::exception& e)
+	{
+		std::cout << "impossible" << std::endl;
 	}
 }
 
-void	convertToFloat(char **argv)
+void	print_float(std::string str)
 {
-	std::cout << "float : ";
-	if (isChar(argv)){
-		std::cout << static_cast<float> (isChar(argv))
-						<< ".0f"<< std::endl;
+	std::cout << "float: ";
+	try
+	{
+		float str_to_f = std::stof(str);
+
+		if (std::isinf(str_to_f))
+			std::cout << std::showpos << str_to_f << std::noshowpos << "f" << std::endl;
+		else
+			std::cout << std::stof(str) << "f" << std::endl;
 	}
-	else{
-		try{
-			float output = std::stof(argv[1]);
-			std::cout << static_cast<float>(output);
-			if (output == (int)output)
-				std::cout << ".0f"<< std::endl;
-			else
-				std::cout << "f"<< std::endl;
-		}catch(std::exception &e){
-			
-		}
+	catch(const std::exception& e)
+	{
+		std::cout << "impossible" << std::endl;
 	}
 }
 
-void	convertToDouble(char **argv)
+void	print_double(std::string str)
 {
-	std::cout << "double : ";
-	if (isChar(argv)){
-		std::cout << static_cast<double> (isChar(argv)) << std::endl;
+	std::cout << "double: ";
+	try
+	{
+		double str_to_d = std::stod(str);
+
+		if (std::isinf(str_to_d))
+			std::cout << std::showpos << str_to_d << std::noshowpos << std::endl;
+		else
+			std::cout << std::stod(str) << std::endl;
 	}
-	else{
-		try{
-			float output = std::stod(argv[1]);
-			std::cout << static_cast<double>(output);
-			if (output == (int)output)
-				std::cout << ".0"<< std::endl;
-		}catch(std::exception &e){
-			
-		}
+	catch(const std::exception& e)
+	{
+		std::cout << "impossible" << std::endl;
 	}
-	// std::cout << std::endl;
 }
 
-int     main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
+	std::cout << std::fixed;
+	std::cout.precision(1);
 	if (argc != 2)
-		std::cout << ERROR << std::endl;
-	else
+		return (print_arg_error());
+	for (int i = 1; i < argc; i++)
 	{
-		convertToChar(argv);
-		convertToInt(argv);
-		convertToFloat(argv);
-		convertToDouble(argv);
+		if (is_valid_arg(argv[i]))
+			return (print_all_impossible());
+		std::string str = static_cast<std::string>(argv[i]);
+		print_char(str);
+		print_int(str);
+		print_float(str);
+		print_double(str);
 	}
-	return (1);
 }

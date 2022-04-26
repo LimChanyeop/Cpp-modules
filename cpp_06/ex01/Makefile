@@ -1,4 +1,4 @@
-NAME		= multiform
+NAME		= reinterpret
 
 CXX			= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
@@ -8,7 +8,6 @@ OBJS		= $(SRCS:.cpp=.o)
 RM			= rm -f
 
 SRCS		= main.cpp
-
 
 all: $(NAME)
 

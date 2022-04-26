@@ -1,4 +1,4 @@
-NAME		= multiform
+NAME		= dynamicCast
 
 CXX			= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
@@ -7,8 +7,8 @@ OBJS		= $(SRCS:.cpp=.o)
 
 RM			= rm -f
 
-SRCS		= main.cpp
-
+SRCS		= main.cpp \
+				Base.cpp
 
 all: $(NAME)
 
