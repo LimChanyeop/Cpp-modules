@@ -8,50 +8,58 @@
 #include <array>
 #include <stack>
 #include <queue>
+#include <list>
 
-template <typename T>
-int		easyfind(T con, int occur){
-	typename T::iterator it;
-	it = std::find (con.begin(), con.end(), occur);
-	if (it != con.end())
-		return (it - con.begin());
-	return -1;
-}
-
-template <typename T>
-int	easyfind(std::stack<T> st, int occur) //LIFO
-{
-	size_t tmp = st.size();
-	std::vector<T> v;
-	for (size_t i = 0; i < tmp; i++){
-		v.push_back(st.top());
-		st.pop();
+class e_out_of_range : public std::exception {
+public:
+	const char* what() const throw() {
+		return ("OUT OF RANGE");
 	}
-	return easyfind(v, occur);
-}
+};
 
 template <typename T>
-int		easyfind(std::queue<T> st, int occur) //FIFO
-{
-	size_t tmp = st.size();
-	std::vector<T> v;
-	for (size_t i = 0; i < tmp; i++){
-		v.push_back(st.front());
-		st.pop();
-	}
-	return easyfind(v, occur);
-}
+typename T::iterator	easyfind(T container, int occur){
+	typename T::iterator it = std::find (container.begin(), container.end(), occur);
+	if (it == container.end())
+		throw e_out_of_range();
+	else
+		return (it);
+};
 
-template <typename T>
-int		easyfind(std::priority_queue<T> st, int occur) //FIFO
-{
-	size_t tmp = st.size();
-	std::vector<T> v;
-	for (size_t i = 0; i < tmp; i++){
-		v.push_back(st.top());
-		st.pop();
-	}
-	return easyfind(v, occur);
-}
+// template <typename T>
+// int	easyfind(std::stack<T> st, int occur) //LIFO
+// {
+// 	size_t size = st.size();
+// 	std::vector<T> v;
+// 	for (size_t i = 0; i < size; i++){
+// 		v.push_back(st.top());
+// 		st.pop();
+// 	}
+// 	return ((easyfind(v, occur) - v.begin()) / sizeof(int));
+// };
+
+// template <typename T>
+// typename T::iterator		easyfind(std::queue<T> st, int occur) //FIFO
+// {
+// 	size_t size = st.size();
+// 	std::vector<T> v;
+// 	for (size_t i = 0; i < size; i++){
+// 		v.push_back(st.front());
+// 		st.pop();
+// 	}
+// 	return easyfind(v, occur);
+// };
+
+// template <typename T>
+// typename T::iterator		easyfind(std::priority_queue<T> st, int occur) //FIFO
+// {
+// 	size_t size = st.size();
+// 	std::vector<T> v;
+// 	for (size_t i = 0; i < size; i++){
+// 		v.push_back(st.top());
+// 		st.pop();
+// 	}
+// 	return easyfind(v, occur);
+// };
 
 #endif
